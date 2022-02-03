@@ -15,6 +15,6 @@ setup(
     # keywords='',
     # project_urls={},
     packages=find_packages(),
-    install_requires=[],
+    install_requires=['python-dateutil'],
     python_requires='>=3.10',
 )
