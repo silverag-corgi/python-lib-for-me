@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+python-dateutil = "~=2.8.2"
 
 [dev-packages]
 
