@@ -4,6 +4,7 @@
 
 import calendar
 from datetime import date, timedelta
+from typing import Generator
 
 from dateutil.relativedelta import relativedelta
 
@@ -38,7 +39,7 @@ def get_last_date_of_last_month(date: date) -> date:
     return date.replace(day=calendar.monthrange(date.year, date.month)[1]) + relativedelta(months=-1)
 
 
-def gen_date_range(start_date: date, end_date: date) -> date:
+def gen_date_range(start_date: date, end_date: date) -> Generator[date, None, None]:
     '''日付範囲生成'''
     for count in range((end_date - start_date).days + 1):
         yield start_date + timedelta(days=count)
