@@ -49,15 +49,10 @@ PyPIには登録せずにローカルで使用する。
 
 本リポジトリをクローンもしくはダウンロードした後、下記コマンドを実行する。
 
-```cmd
-> cd [application_path]             # ライブラリをインストールしたいアプリケーションのパスに移動する
-> pipenv install -e [library_path]  # ライブラリのパスを指定して編集モードでインストールする
-```
-
 実行例：
 ```cmd
-> cd fgo-farm-report-collection
-> pipenv install -e "../python-lib-for-me"
+> cd fgo-farm-report-collection            # ライブラリをインストールしたいアプリケーションのパスに移動する
+> pipenv install -e "../python-lib-for-me" # ライブラリのパスを指定して編集モードでインストールする
 
 Installing -e ../python-lib-for-me...
 Adding python-lib-for-me to Pipfile's [packages]...
