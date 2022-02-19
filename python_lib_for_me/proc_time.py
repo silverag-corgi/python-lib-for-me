@@ -1,3 +1,7 @@
+'''
+処理時間モジュール
+'''
+
 import time
 from logging import Logger
 from typing import Any, Callable, Optional
@@ -10,21 +14,21 @@ def measure_proc_time(function_object: Callable) -> Any:
     '''
     処理時間計測デコレータ
     
-    Summary:
-        処理時間を計測するデコレータ。
-    
     Args:
         function_object (Callable): 関数オブジェクト
     
     Returns:
         Any: 関数オブジェクトの処理結果
     
-    Example:
-        - @マークを使用して呼び出す\n
-        @python_lib_for_me.measure_proc_time\n
-        def foobar(var):\n
-        - 関数として呼び出す\n
-        python_lib_for_me.measure_proc_time(foobar)(var)\n
+    Examples:
+        @マークを使用して呼び出す
+        >>> foobar(var)
+        >>> ...
+        >>> @python_lib_for_me.measure_proc_time
+        >>> def foobar(var):
+        
+        関数として呼び出す
+        >>> python_lib_for_me.measure_proc_time(foobar)(var)
     '''
     
     def wrapper(*args, **kargs) -> Any:
