@@ -1,6 +1,25 @@
-[build-system]
-requires = [
-    "setuptools",
-    "wheel",
+[tool.poetry]
+name = "python-lib-for-me"
+version = "0.1.0"
+description = "Python lib for me"
+authors = ["Rem_"]
+license = "MIT"
+readme = "README.md"
+packages = [
+    {include = "python_lib_for_me", from = "src"}
 ]
-build-backend = "setuptools.build_meta"
+
+[tool.poetry.build]
+generate-setup-file = true
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-dateutil = "^2.8.2"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
