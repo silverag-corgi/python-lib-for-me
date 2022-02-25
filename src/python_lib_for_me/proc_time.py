@@ -31,7 +31,7 @@ def measure_proc_time(function_object: Callable) -> Any:
         >>> python_lib_for_me.measure_proc_time(foobar)(var)
     '''
     
-    def wrapper(*args, **kargs) -> Any:
+    def wrapper(*args: Any, **kargs: Any) -> Any:
         lg: Optional[Logger] = None
         
         try:
