@@ -17,9 +17,54 @@ python = "^3.10"
 python-dateutil = "^2.8.2"
 
 [tool.poetry.dev-dependencies]
+pyproject-flake8 = "^0.0.1-alpha.2"
+isort = "^5.10.1"
+mypy = "^0.931"
 
 [tool.poetry.scripts]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.flake8] # pyproject-flake8
+max-line-length = 100
+# max-complexity = 18
+extend-ignore = """
+    E203,
+    W293,
+    """
+    # defaults: E121,E123,E126,E226,E24,E704,W503,W504
+    # E203 Whitespace before ':'
+    # W293 blank line contains whitespace
+per-file-ignores = """
+    __init__.py: F401,F403
+    """
+    # F401 Module imported but unused
+    # F403 'from module import *' used; unable to detect undefined names
+extend-exclude = """
+    .venv,
+    build,
+    """
+    # defaults: .svn,CVS,.bzr,.hg,.git,__pycache__,.tox,.nox,.eggs,*.egg
+
+[tool.isort]
+src_paths = ["src", "tests"]
+multi_line_output = 3
+include_trailing_comma = true
+line_length = 100
+
+[tool.mypy]
+# Import discovery
+files = "src,tests"
+# Untyped definitions and calls
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_decorators = true
+check_untyped_defs = true
+# Configuring error messages
+show_error_codes = true
+pretty = true
+# Configuring warnings
+warn_unreachable = true
