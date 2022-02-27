@@ -47,7 +47,7 @@ def measure_proc_time(function_object: Callable) -> Any:
             # 処理時間計算
             end_time: float = time.perf_counter()
             proc_time: float = end_time - start_time
-            lg.info(f'{function_object.__name__}：{proc_time:.05f}秒')
+            pyl.log_inf(lg, f'{function_object.__name__}：{proc_time:.05f}秒')
         except Exception as e:
             raise(e)
         
