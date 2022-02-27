@@ -19,3 +19,58 @@ def get_logger(python_file_name: str) -> Logger:
         raise(e)
     
     return logger
+
+
+def log_deb(logger: Logger, msg: str) -> None:
+    '''ログ出力(DEBUG)'''
+    
+    try:
+        logger.debug(msg, stacklevel=2)
+    except Exception as e:
+        raise(e)
+    
+    return None
+
+
+def log_inf(logger: Logger, msg: str) -> None:
+    '''ログ出力(INFO)'''
+    
+    try:
+        logger.info(msg, stacklevel=2)
+    except Exception as e:
+        raise(e)
+    
+    return None
+
+
+def log_war(logger: Logger, msg: str) -> None:
+    '''ログ出力(WARNING)'''
+    
+    try:
+        logger.warning(msg, stacklevel=2)
+    except Exception as e:
+        raise(e)
+    
+    return None
+
+
+def log_err(logger: Logger, msg: str) -> None:
+    '''ログ出力(ERROR)'''
+    
+    try:
+        logger.error(msg, stacklevel=2)
+    except Exception as e:
+        raise(e)
+    
+    return None
+
+
+def log_exc(logger: Logger, msg: str) -> None:
+    '''ログ出力(EXCEPTION)'''
+    
+    try:
+        logger.exception(msg, exc_info=True, stacklevel=2)
+    except Exception as e:
+        raise(e)
+    
+    return None
