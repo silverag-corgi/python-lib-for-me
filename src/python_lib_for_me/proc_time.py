@@ -6,7 +6,7 @@ import time
 from logging import Logger
 from typing import Any, Callable, Optional
 
-from python_lib_for_me import logger
+import python_lib_for_me as pyl
 
 
 def measure_proc_time(function_object: Callable) -> Any:
@@ -36,7 +36,7 @@ def measure_proc_time(function_object: Callable) -> Any:
         
         try:
             # ロガー取得
-            lg = logger.get_logger(__name__)
+            lg = pyl.get_logger(__name__)
             
             # 開始時間設定
             start_time: float = time.perf_counter()
