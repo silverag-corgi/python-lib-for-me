@@ -1,6 +1,6 @@
 help:
 	@echo set target to run "make" command
-	@echo target: install, update, lint, format, test
+	@echo target: install, update, lint, format, test, clean
 
 install:
 	@echo -------------------- install packages ----------------------------------------------------
@@ -25,3 +25,7 @@ format:
 test:
 	@echo -------------------- run pytest to test --------------------------------------------------
 	@poetry run pytest --verbose
+
+clean:
+	@echo -------------------- clean package -------------------------------------------------------
+	@rmdir /s /q .mypy_cache .pytest_cache .venv
