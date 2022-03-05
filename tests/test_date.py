@@ -54,3 +54,15 @@ def test_gen_date_range() -> None:
         datetime.strptime('2022-02-05', '%Y-%m-%d').date(),
     ]
     assert actual_values == expected_values
+
+
+def test_convert_timestamp_to_jst() -> None:
+    actual_value: str = pyl.convert_timestamp_to_jst('2022-03-05 11:00:00+00:00')
+    expected_value: str = '2022-03-05 20:00:00'
+    assert actual_value == expected_value
+
+
+def test_convert_timestamp_to_utc() -> None:
+    actual_value: str = pyl.convert_timestamp_to_utc('2022-03-05 11:00:00+09:00')
+    expected_value: str = '2022-03-05 02:00:00'
+    assert actual_value == expected_value

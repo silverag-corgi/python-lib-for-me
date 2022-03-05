@@ -3,8 +3,9 @@
 '''
 
 import calendar
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from typing import Iterator
+from zoneinfo import ZoneInfo
 
 from dateutil.relativedelta import relativedelta
 
@@ -73,3 +74,33 @@ def gen_date_range(start_date: date, end_date: date) -> Iterator[date]:
     '''日付範囲生成'''
     for count in range((end_date - start_date).days + 1):
         yield start_date + timedelta(days=count)
+
+
+def convert_timestamp_to_jst(
+        src_timestamp: str,
+        src_timestamp_format: str = '%Y-%m-%d %H:%M:%S%z',
+        jst_timestamp_format: str = '%Y-%m-%d %H:%M:%S'
+    ) -> str:
+    
+    '''タイムスタンプJST変換'''
+    
+    src_datetime: datetime = datetime.strptime(src_timestamp, src_timestamp_format)
+    jst_datetime: datetime = src_datetime.astimezone(ZoneInfo('Japan'))
+    jst_timestamp: str = datetime.strftime(jst_datetime, jst_timestamp_format)
+    
+    return jst_timestamp
+
+
+def convert_timestamp_to_utc(
+        src_timestamp: str,
+        src_timestamp_format: str = '%Y-%m-%d %H:%M:%S%z',
+        utc_timestamp_format: str = '%Y-%m-%d %H:%M:%S'
+    ) -> str:
+    
+    '''タイムスタンプUTC変換'''
+    
+    src_datetime: datetime = datetime.strptime(src_timestamp, src_timestamp_format)
+    utc_datetime: datetime = src_datetime.astimezone(ZoneInfo('UTC'))
+    utc_timestamp: str = datetime.strftime(utc_datetime, utc_timestamp_format)
+    
+    return utc_timestamp
