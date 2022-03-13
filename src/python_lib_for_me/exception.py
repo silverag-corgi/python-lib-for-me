@@ -4,5 +4,14 @@
 
 
 class CustomError(Exception):
-    '''自作例外'''
+    '''
+    カスタムエラー
+    
+    Extends:
+        - Exception
+    
+    Overrides:
+        -
+    '''
+    
     pass
