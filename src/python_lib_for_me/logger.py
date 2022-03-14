@@ -5,7 +5,7 @@
 
 from json import load
 from logging import Logger, config, getLogger
-from typing import TextIO
+from typing import Optional, TextIO
 
 
 def get_logger(module_name: str) -> Logger:
@@ -43,11 +43,17 @@ def log_inf(logger: Logger, msg: str) -> None:
     return None
 
 
-def log_war(logger: Logger, msg: str) -> None:
+def log_war(logger: Logger, msg: str, exception: Optional[Exception] = None) -> None:
     '''ログ出力(WARNING)'''
     
     try:
-        logger.warning(msg, stacklevel=2)
+        msg_and_err_msg: str = ''
+        if exception is None:
+            msg_and_err_msg = msg
+        else:
+            err_msg: str = str(exception).replace('\n', ' ')
+            msg_and_err_msg = f'{msg}(err_msg:{err_msg})'
+        logger.warning(msg_and_err_msg, stacklevel=2)
     except Exception as e:
         raise(e)
     
