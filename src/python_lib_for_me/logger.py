@@ -90,7 +90,7 @@ def log_war(logger: Logger, msg: str, exception: Optional[Exception] = None) -> 
         if exception is None:
             msg_and_err_msg = msg
         else:
-            err_msg: str = str(exception).replace('\n', ' ')
+            err_msg: str = str(exception).replace('\n', ', ')
             msg_and_err_msg = f'{msg}(err_msg:{err_msg})'
         logger.warning(msg_and_err_msg, stacklevel=2)
     except Exception as e:
