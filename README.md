@@ -39,6 +39,10 @@ PyPIには登録せずにローカルで使用する。
   - タイムスタンプUTC変換関数
 - 例外モジュール
   - カスタムエラークラス
+- ファイルモジュール
+  - ファイル名生成
+- リストモジュール
+  - リスト分割
 - ロガーモジュール
   - ロガー取得関数
   - ログ出力(DEBUG)
@@ -100,8 +104,8 @@ python-lib-for-me = {path = "../python-lib-for-me", develop = true}
 下記コードでアプリケーションから機能を呼び出す。
 
 ```python
-import python_lib_for_me
-python_lib_for_me.do_function()
+import python_lib_for_me as pyl
+pyl.do_function()
 ```
 
 
