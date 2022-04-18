@@ -29,52 +29,57 @@ def get_logger(module_name: str) -> Logger:
     return logger
 
 
-def log_deb(logger: Logger, msg: str) -> None:
+def log_deb(logger: Optional[Logger], msg: str) -> None:
+    
     '''
-    ログ出力(DEBUG)
+    ログ出力(デバッグ)
     
     Args:
-        logger (Logger) : ロガー
-        msg (str)       : メッセージ
+        logger (Optional[Logger])   : ロガー
+        msg (str)                   : メッセージ
     
     Returns:
         -
     '''
     
     try:
-        logger.debug(msg, stacklevel=2)
+        if logger is not None:
+            logger.debug(msg, stacklevel=2)
     except Exception as e:
         raise(e)
     
     return None
 
 
-def log_inf(logger: Logger, msg: str) -> None:
+def log_inf(logger: Optional[Logger], msg: str) -> None:
+    
     '''
-    ログ出力(INFO)
+    ログ出力(情報)
     
     Args:
-        logger (Logger) : ロガー
-        msg (str)       : メッセージ
+        logger (Optional[Logger])   : ロガー
+        msg (str)                   : メッセージ
     
     Returns:
         -
     '''
     
     try:
-        logger.info(msg, stacklevel=2)
+        if logger is not None:
+            logger.info(msg, stacklevel=2)
     except Exception as e:
         raise(e)
     
     return None
 
 
-def log_war(logger: Logger, msg: str, exception: Optional[Exception] = None) -> None:
+def log_war(logger: Optional[Logger], msg: str, exception: Optional[Exception] = None) -> None:
+    
     '''
-    ログ出力(WARNING)
+    ログ出力(警告)
     
     Args:
-        logger (Logger)                             : ロガー
+        logger (Optional[Logger])                   : ロガー
         msg (str)                                   : メッセージ
         exception (Optional[Exception], optional)   : 例外
     
@@ -87,25 +92,29 @@ def log_war(logger: Logger, msg: str, exception: Optional[Exception] = None) -> 
     
     try:
         msg_and_err_msg: str = ''
+        
         if exception is None:
             msg_and_err_msg = msg
         else:
             err_msg: str = str(exception).replace('\n', ', ')
             msg_and_err_msg = f'{msg}(err_msg:{err_msg})'
-        logger.warning(msg_and_err_msg, stacklevel=2)
+        
+        if logger is not None:
+            logger.warning(msg_and_err_msg, stacklevel=2)
     except Exception as e:
         raise(e)
     
     return None
 
 
-def log_err(logger: Logger, msg: str) -> None:
+def log_err(logger: Optional[Logger], msg: str) -> None:
+    
     '''
-    ログ出力(ERROR)
+    ログ出力(エラー)
     
     Args:
-        logger (Logger) : ロガー
-        msg (str)       : メッセージ
+        logger (Optional[Logger])   : ロガー
+        msg (str)                   : メッセージ
     
     Returns:
         -
@@ -115,20 +124,22 @@ def log_err(logger: Logger, msg: str) -> None:
     '''
     
     try:
-        logger.error(msg, stacklevel=2)
+        if logger is not None:
+            logger.error(msg, stacklevel=2)
     except Exception as e:
         raise(e)
     
     return None
 
 
-def log_exc(logger: Logger, msg: str) -> None:
+def log_exc(logger: Optional[Logger], msg: str) -> None:
+    
     '''
-    ログ出力(EXCEPTION)
+    ログ出力(例外)
     
     Args:
-        logger (Logger) : ロガー
-        msg (str)       : メッセージ
+        logger (Optional[Logger])   : ロガー
+        msg (str)                   : メッセージ
     
     Returns:
         -
@@ -138,7 +149,8 @@ def log_exc(logger: Logger, msg: str) -> None:
     '''
     
     try:
-        logger.exception(msg, exc_info=True, stacklevel=2)
+        if logger is not None:
+            logger.exception(msg, exc_info=True, stacklevel=2)
     except Exception as e:
         raise(e)
     
