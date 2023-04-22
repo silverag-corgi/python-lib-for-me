@@ -46,11 +46,8 @@ def log_deb(
         -
     """
 
-    try:
-        if logger is not None:
-            logger.debug(msg, stacklevel=2)
-    except Exception as e:
-        raise (e)
+    if logger is not None:
+        logger.debug(msg, stacklevel=2)
 
     return None
 
@@ -70,11 +67,8 @@ def log_inf(
         -
     """
 
-    try:
-        if logger is not None:
-            logger.info(msg, stacklevel=2)
-    except Exception as e:
-        raise (e)
+    if logger is not None:
+        logger.info(msg, stacklevel=2)
 
     return None
 
@@ -99,19 +93,15 @@ def log_war(
         - 例外発生時にメッセージと例外情報(1行)を出力し、処理を続行する場合に使用する
     """
 
-    try:
-        msg_and_err_msg: str = ""
+    msg_and_err_msg: str
+    if exception is None:
+        msg_and_err_msg = msg
+    else:
+        err_msg: str = str(exception).replace("\n", ", ")
+        msg_and_err_msg = f"{msg}(err_msg:{err_msg})"
 
-        if exception is None:
-            msg_and_err_msg = msg
-        else:
-            err_msg: str = str(exception).replace("\n", ", ")
-            msg_and_err_msg = f"{msg}(err_msg:{err_msg})"
-
-        if logger is not None:
-            logger.warning(msg_and_err_msg, stacklevel=2)
-    except Exception as e:
-        raise (e)
+    if logger is not None:
+        logger.warning(msg_and_err_msg, stacklevel=2)
 
     return None
 
@@ -134,11 +124,8 @@ def log_err(
         - 例外発生時にメッセージを出力し、処理を中断する場合に使用する
     """
 
-    try:
-        if logger is not None:
-            logger.error(msg, stacklevel=2)
-    except Exception as e:
-        raise (e)
+    if logger is not None:
+        logger.error(msg, stacklevel=2)
 
     return None
 
@@ -161,10 +148,7 @@ def log_exc(
         - 例外発生時に処理を中断した後に、メッセージと例外情報を出力する場合に使用する
     """
 
-    try:
-        if logger is not None:
-            logger.exception(msg, exc_info=True, stacklevel=2)
-    except Exception as e:
-        raise (e)
+    if logger is not None:
+        logger.exception(msg, exc_info=True, stacklevel=2)
 
     return None
