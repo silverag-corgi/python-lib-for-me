@@ -3,8 +3,7 @@
 """
 
 import time
-from logging import Logger
-from typing import Any, Callable, Optional
+from typing import Any, Callable
 
 import python_lib_for_me as pyl
 
@@ -36,11 +35,9 @@ def measure_proc_time(
         *args: Any,
         **kargs: Any,
     ) -> Any:
-        lg: Optional[Logger] = None
-
         try:
             # ロガー取得
-            lg = pyl.get_logger(__name__)
+            clg: pyl.CustomLogger = pyl.CustomLogger(__name__)
 
             # 開始時間設定
             start_time: float = time.perf_counter()
@@ -51,7 +48,7 @@ def measure_proc_time(
             # 処理時間計算
             end_time: float = time.perf_counter()
             proc_time: float = end_time - start_time
-            pyl.log_inf(lg, f"{function_object.__name__}：{proc_time:.05f}秒")
+            clg.log_inf(f"{function_object.__name__}：{proc_time:.05f}秒")
         except Exception as e:
             raise (e)
 

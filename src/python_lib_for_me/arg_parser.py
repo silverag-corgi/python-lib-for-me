@@ -4,8 +4,7 @@
 
 import argparse
 import sys
-from logging import Logger
-from typing import Any, Optional
+from typing import Any
 
 from typing_extensions import override
 
@@ -15,9 +14,6 @@ import python_lib_for_me as pyl
 class CustomArgumentParser(argparse.ArgumentParser):
     """
     カスタム引数解析
-
-    Extends:
-        - argparse.ArgumentParser
 
     Notes:
         - mainパッケージのモジュールで引数を解析する際に使用する
@@ -35,18 +31,21 @@ class CustomArgumentParser(argparse.ArgumentParser):
             file (Any, optional): テキストストリーム (TextIO)
 
         Notes:
-            - Help-printing methods
+            `_print_message`は下記関数で呼び出される
+            >>> # Help-printing methods
+            >>> def print_usage(self, file=None):
+            >>> def print_help(self, file=None):
+            >>> # Exiting methods
+            >>> def exit(self, status=0, message=None):
         """
 
-        lg: Optional[Logger] = None
-
         try:
-            lg = pyl.get_logger(__name__)
+            clg: pyl.CustomLogger = pyl.CustomLogger(__name__)
 
             if file is sys.stdout:
-                pyl.log_inf(lg, f"\n{message}")
+                clg.log_inf(f"\n{message}")
             elif file is sys.stderr:
-                pyl.log_err(lg, f"\n{message}")
+                clg.log_err(f"\n{message}")
         except Exception as e:
             raise (e)
 
