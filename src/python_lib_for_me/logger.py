@@ -9,11 +9,13 @@ import logging
 import os
 import warnings
 from logging import Logger, config
-from typing import Any, Final, Optional, TextIO
+from typing import Any, Final, Optional, TextIO, cast
+
+import yaml
 
 import python_lib_for_me as pyl
 
-LOG_ENV_CONFIG_FILE_PATH: Final[str] = "./config/log_env_config.json"
+LOG_ENV_CONFIG_FILE_PATH: Final[str] = "./config/log_env_config.yml"
 
 
 class CustomLogger:
@@ -52,7 +54,9 @@ class CustomLogger:
 
             # ログ環境設定ファイルの読み込み
             with open(log_env_config_file_path, "r", encoding="utf-8") as log_env_config_file_obj:
-                log_env_config_dict: dict[Any, Any] = json.load(log_env_config_file_obj)
+                log_env_config_dict: dict[Any, Any] = cast(
+                    dict, yaml.safe_load(log_env_config_file_obj)
+                )
                 config.dictConfig(log_env_config_dict)
 
             # ロガーの生成

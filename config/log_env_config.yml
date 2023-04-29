@@ -1,0 +1,29 @@
+version: 1
+formatters:
+  consoleFormatter:
+    format: "[%(levelname).3s][%(processName)20s][%(threadName)20s][%(filename)40s:%(lineno)04d][%(funcName)40s] %(message)s"
+    datefmt: "%Y-%m-%d %H:%M:%S"
+  fileFormatter:
+    format: "[%(asctime)s.%(msecs)03d][%(levelname).3s][%(processName)20s][%(threadName)20s][%(filename)40s:%(lineno)04d][%(funcName)40s] %(message)s"
+    datefmt: "%Y-%m-%d %H:%M:%S"
+handlers:
+  consoleHandler:
+    class: logging.StreamHandler
+    formatter: consoleFormatter
+    level: DEBUG
+    stream: ext://sys.stdout
+  fileHandler:
+    class: logging.handlers.RotatingFileHandler
+    formatter: fileFormatter
+    level: DEBUG
+    filename: ./log/application.log
+    maxBytes: 1048576 # 1024*1024*1 = 1MB
+    backupCount: 3
+    encoding: utf-8
+root:
+  level: DEBUG
+  handlers: [
+    consoleHandler,
+    fileHandler
+  ]
+disable_existing_loggers: false
