@@ -3,11 +3,17 @@
 参照URL：https://docs.python.org/ja/3/howto/logging.html
 """
 
+import inspect
 import json
 import logging
+import os
 import warnings
 from logging import Logger, config
-from typing import Any, Optional, TextIO
+from typing import Any, Final, Optional, TextIO
+
+import python_lib_for_me as pyl
+
+LOG_ENV_CONFIG_FILE_PATH: Final[str] = "./config/log_env_config.json"
 
 
 class CustomLogger:
@@ -18,31 +24,39 @@ class CustomLogger:
     def __init__(
         self,
         module_name: str,
-        log_env_config_file_path: str = "./config/log_env_config.json",
+        use_default_log_env_config_file: bool = True,
     ) -> None:
         """
         コンストラクタ
 
         Args:
-            module_name (str)               : モジュール名
-            log_env_config_file_path (str)  : ログ環境変数設定ファイルパス
+            module_name (str)                           : モジュール名
+            use_default_log_env_config_file (bool)      : デフォルトのログ環境設定ファイルの使用有無
 
         Raises:
             OSError: ファイル読み込み失敗
         """
 
         try:
-            # ログ環境変数設定ファイルの読み込み
-            log_env_config_file_obj: TextIO = open(
-                log_env_config_file_path,
-                "r",
-                encoding="utf-8",
-            )
-            log_env_config_dict: dict[Any, Any] = json.load(log_env_config_file_obj)
-            config.dictConfig(log_env_config_dict)
+            # ログ環境設定ファイルパスの生成
+            log_env_config_file_path: str
+            if use_default_log_env_config_file is True:
+                # デフォルトファイルを使用する場合
+                root_path_of_this_lib: str = os.path.dirname(inspect.getfile(pyl))
+                log_env_config_file_path = (
+                    f"{root_path_of_this_lib}/../../{LOG_ENV_CONFIG_FILE_PATH}"
+                )
+            else:
+                # 各自で用意したファイルを使用する場合
+                log_env_config_file_path = LOG_ENV_CONFIG_FILE_PATH
+
+            # ログ環境設定ファイルの読み込み
+            with open(log_env_config_file_path, "r", encoding="utf-8") as log_env_config_file_obj:
+                log_env_config_dict: dict[Any, Any] = json.load(log_env_config_file_obj)
+                config.dictConfig(log_env_config_dict)
 
             # ロガーの生成
-            self.__logger: Logger = logging.getLogger(module_name)
+            self.__logger: logging.Logger = logging.getLogger(module_name)
         except Exception as e:
             raise (e)
 
