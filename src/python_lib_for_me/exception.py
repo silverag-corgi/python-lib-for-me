@@ -15,3 +15,17 @@ class CustomError(Exception):
     """
 
     pass
+
+
+class ArgumentValidationError(Exception):
+    """
+    引数検証エラー
+
+    Extends:
+        - Exception
+
+    Overrides:
+        -
+    """
+
+    pass
