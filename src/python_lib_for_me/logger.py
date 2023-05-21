@@ -27,13 +27,15 @@ class CustomLogger:
         self,
         module_name: str,
         use_default_log_env_config_file: bool = True,
+        use_debug_mode: bool = False,
     ) -> None:
         """
         コンストラクタ
 
         Args:
-            module_name (str)                           : モジュール名
-            use_default_log_env_config_file (bool)      : デフォルトのログ環境設定ファイルの使用有無
+            module_name (str)                       : モジュール名
+            use_default_log_env_config_file (bool)  : デフォルトのログ環境設定ファイルの使用有無
+            use_debug_mode (bool)                   : デバッグモード使用有無
 
         Raises:
             OSError: ファイル読み込み失敗
@@ -61,6 +63,10 @@ class CustomLogger:
 
             # ロガーの生成
             self.__logger: logging.Logger = logging.getLogger(module_name)
+
+            # ログレベルの設定
+            if use_debug_mode is True:
+                self.__logger.setLevel(logging.DEBUG)
         except Exception as e:
             raise (e)
 
